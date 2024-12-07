@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Income Tax Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      font-weight: bold;
+      color: green;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Income Tax Calculator</h1>
+    <label for="income">Enter Your Taxable Income (in PHP):</label>
+    <input type="number" id="income" placeholder="Enter taxable income" />
+
+    <button onclick="calculateTax()">Compute Tax</button>
+    <p class="result" id="result"></p>
+  </div>
+
+  <script>
+    function calculateTax() {
+      const income = parseFloat(document.getElementById("income").value);
+      let tax = 0;
+
+      if (isNaN(income) || income < 0) {
+        document.getElementById("result").innerText = "Please enter a valid taxable income.";
+        return;
+      }
+
+      if (income <= 250000) {
+        tax = 0; // No tax
+      } else if (income <= 400000) {
+        tax = 0.2 * (income - 250000); // 20% of the excess over P250,000
+      } else if (income <= 800000) {
+        tax = 30000 + 0.25 * (income - 400000); // P30,000 + 25% of the excess over P400,000
+      } else if (income <= 2000000) {
+        tax = 130000 + 0.30 * (income - 800000); // P130,000 + 30% of the excess over P800,000
+      } else if (income <= 8000000) {
+        tax = 490000 + 0.32 * (income - 2000000); // P490,000 + 32% of the excess over P2,000,000
+      } else {
+        tax = 2410000 + 0.35 * (income - 8000000); // P2,410,000 + 35% of the excess over P8,000,000
+      }
+
+      document.getElementById("result").innerText = `The computed income tax is PHP ${tax.toFixed(2)}.`;
+    }
+  </script>
+</body>
+</html>
