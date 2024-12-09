@@ -10,15 +10,15 @@
       font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f0f0f0;
+      background-color: #f9f9f9;
     }
 
     header {
-      background-color: #333;
+      background: linear-gradient(90deg, #4caf50, #2196f3);
       color: white;
       padding: 30px;
       text-align: center;
-      border-bottom: 5px solid #444;
+      border-bottom: 5px solid #1976d2;
     }
 
     header h1 {
@@ -31,7 +31,7 @@
     }
 
     nav {
-      background-color: #444;
+      background-color: #1976d2;
       padding: 15px;
       text-align: center;
     }
@@ -41,10 +41,14 @@
       margin: 0 20px;
       text-decoration: none;
       font-size: 18px;
+      transition: color 0.3s, background-color 0.3s;
+      padding: 8px 12px;
+      border-radius: 4px;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      background-color: #ffffff;
+      color: #1976d2;
     }
 
     .container {
@@ -54,32 +58,69 @@
     }
 
     section {
-      background-color: white;
+      background-color: #ffffff;
       margin: 20px 0;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
-    iframe {
-      width: 100%;
-      height: 400px;
+    section h2 {
+      color: #4caf50;
+      margin-top: 0;
+    }
+
+    /* Fullscreen iframe styles */
+    .fullscreen-iframe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      display: none; /* Hidden by default */
+    }
+
+    .fullscreen-iframe iframe {
+      width: 90%;
+      height: 90%;
       border: none;
-      margin-top: 10px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: red;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
     }
 
     footer {
-      background-color: #333;
+      background: linear-gradient(90deg, #2196f3, #4caf50);
       color: white;
       text-align: center;
       padding: 15px;
       margin-top: 20px;
     }
 
+    footer p {
+      margin: 0;
+    }
+
     @media (max-width: 768px) {
       header h1 {
         font-size: 28px;
       }
+
       nav a {
         font-size: 16px;
       }
@@ -102,7 +143,7 @@
     <!-- About Me Section -->
     <section id="about">
       <h2>About Me</h2>
-      <p>Hello! I'm Clyde Estrada, a Computer Science student studying in Ateneo de Davao University. Welcome to my personal website or as I like to call it my "teapot"</p>
+      <p>Hello! I'm Clyde Estrada, a Computer Science student studying at Ateneo de Davao University. Welcome to my personal website or, as I like to call it, my "teapot."</p>
     </section>
 
     <!-- Assignments Section -->
@@ -110,49 +151,41 @@
       <h2>Assignments</h2>
 
       <h3>1. Conversion Tool</h3>
-      <p>This tool converts between Celsius and Fahrenheit, and meters and feet:</p>
-      <iframe src="convert.html"></iframe>
+      <button onclick="openFullscreen('convert.html')">View Conversion Tool</button>
 
       <h3>2. Factorial and Sum/Average Calculator</h3>
-      <p>This tool calculates the factorial, sum, and average of numbers:</p>
-      <iframe src="factorial.html"></iframe>
+      <button onclick="openFullscreen('factorial.html')">View Factorial Calculator</button>
 
       <h3>3. Payroll System</h3>
-      <p>Add and delete employees in a payroll system:</p>
-      <iframe src="payroll.html"></iframe>
+      <button onclick="openFullscreen('payroll.html')">View Payroll System</button>
 
       <h3>4. Tax Computation Tool</h3>
-      <p>Compute taxes based on income:</p>
-      <iframe src="tax.html"></iframe>
+      <button onclick="openFullscreen('tex.html')">View Tax Computation Tool</button>
     </section>
+  </div>
+
+  <!-- Fullscreen iframe container -->
+  <div class="fullscreen-iframe" id="fullscreen">
+    <button class="close-btn" onclick="closeFullscreen()">Close</button>
+    <iframe src=""></iframe>
   </div>
 
   <footer>
     <p>&copy; 2024 Clyde Estrada. All Rights Reserved.</p>
   </footer>
 
-  <!-- Live2D Widget -->
-  <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
   <script>
-    L2Dwidget.init({
-      model: {
-        scale: 1,
-      },
-      display: {
-        position: "right",
-        width: 150,
-        height: 300,
-        hOffset: 20,
-        vOffset: 20,
-      },
-      mobile: {
-        show: true,
-        scale: 0.5,
-      },
-      react: {
-        opacity: 1,
-      },
-    });
+    function openFullscreen(src) {
+      const fullscreen = document.getElementById('fullscreen');
+      fullscreen.style.display = 'flex';
+      fullscreen.querySelector('iframe').src = src;
+    }
+
+    function closeFullscreen() {
+      const fullscreen = document.getElementById('fullscreen');
+      fullscreen.style.display = 'none';
+      fullscreen.querySelector('iframe').src = '';
+    }
   </script>
 
 </body>
