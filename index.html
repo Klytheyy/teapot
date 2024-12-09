@@ -13,7 +13,6 @@
       background-color: #f9f9f9;
     }
 
-    /* Header Styles */
     header {
       background: linear-gradient(90deg, #4caf50, #2196f3);
       color: white;
@@ -31,7 +30,6 @@
       font-size: 18px;
     }
 
-    /* Navigation Bar */
     nav {
       background-color: #1976d2;
       padding: 15px;
@@ -53,7 +51,6 @@
       color: #1976d2;
     }
 
-    /* Main Content */
     .container {
       max-width: 1200px;
       margin: 20px auto;
@@ -73,15 +70,40 @@
       margin-top: 0;
     }
 
-    iframe {
-      width: 100%;
-      height: 400px;
-      border: 2px solid #1976d2;
-      border-radius: 8px;
-      margin-top: 10px;
+    /* Fullscreen iframe styles */
+    .fullscreen-iframe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      display: none; /* Hidden by default */
     }
 
-    /* Footer Styles */
+    .fullscreen-iframe iframe {
+      width: 90%;
+      height: 90%;
+      border: none;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: red;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
     footer {
       background: linear-gradient(90deg, #2196f3, #4caf50);
       color: white;
@@ -94,7 +116,6 @@
       margin: 0;
     }
 
-    /* Responsive Design */
     @media (max-width: 768px) {
       header h1 {
         font-size: 28px;
@@ -102,29 +123,6 @@
 
       nav a {
         font-size: 16px;
-      }
-
-      iframe {
-        height: 300px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      nav a {
-        display: block;
-        margin: 10px 0;
-      }
-
-      iframe {
-        height: 250px;
-      }
-
-      .container {
-        padding: 0 10px;
-      }
-
-      section {
-        padding: 15px;
       }
     }
   </style>
@@ -153,26 +151,42 @@
       <h2>Assignments</h2>
 
       <h3>1. Conversion Tool</h3>
-      <p>This tool converts between Celsius and Fahrenheit, and meters and feet:</p>
-      <iframe src="convert.html"></iframe>
+      <button onclick="openFullscreen('convert.html')">View Conversion Tool</button>
 
       <h3>2. Factorial and Sum/Average Calculator</h3>
-      <p>This tool calculates the factorial, sum, and average of numbers:</p>
-      <iframe src="factorial.html"></iframe>
+      <button onclick="openFullscreen('factorial.html')">View Factorial Calculator</button>
 
       <h3>3. Payroll System</h3>
-      <p>Add and delete employees in a payroll system:</p>
-      <iframe src="payroll.html"></iframe>
+      <button onclick="openFullscreen('payroll.html')">View Payroll System</button>
 
       <h3>4. Tax Computation Tool</h3>
-      <p>Compute taxes based on income:</p>
-      <iframe src="tex.html"></iframe>
+      <button onclick="openFullscreen('tex.html')">View Tax Computation Tool</button>
     </section>
+  </div>
+
+  <!-- Fullscreen iframe container -->
+  <div class="fullscreen-iframe" id="fullscreen">
+    <button class="close-btn" onclick="closeFullscreen()">Close</button>
+    <iframe src=""></iframe>
   </div>
 
   <footer>
     <p>&copy; 2024 Clyde Estrada. All Rights Reserved.</p>
   </footer>
+
+  <script>
+    function openFullscreen(src) {
+      const fullscreen = document.getElementById('fullscreen');
+      fullscreen.style.display = 'flex';
+      fullscreen.querySelector('iframe').src = src;
+    }
+
+    function closeFullscreen() {
+      const fullscreen = document.getElementById('fullscreen');
+      fullscreen.style.display = 'none';
+      fullscreen.querySelector('iframe').src = '';
+    }
+  </script>
 
 </body>
 </html>
