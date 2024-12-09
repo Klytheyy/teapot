@@ -7,49 +7,62 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
       margin: 0;
       padding: 20px;
+      background-color: #e3f2fd;
       text-align: center;
     }
 
     h1 {
-      color: #1976d2;
+      color: #0d47a1;
     }
 
-    .container {
-      background-color: #ffffff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    .conversion-container {
       max-width: 400px;
-      margin: auto;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    input, button, select {
+    label, select, input, button {
+      display: block;
+      width: 100%;
       margin: 10px 0;
-      padding: 10px;
       font-size: 16px;
+    }
+
+    input, select {
+      padding: 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      width: 100%;
     }
 
     button {
-      background-color: #1976d2;
+      background-color: #0d47a1;
       color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
       cursor: pointer;
     }
 
     button:hover {
-      background-color: #0d47a1;
+      background-color: #1565c0;
+    }
+
+    .result {
+      margin-top: 15px;
+      font-size: 18px;
+      color: #0d47a1;
     }
   </style>
 </head>
 <body>
   <h1>Conversion Tool</h1>
-  <div class="container">
-    <label for="conversion-type">Select Conversion Type:</label>
+  <div class="conversion-container">
+    <label for="conversion-type">Choose a Conversion:</label>
     <select id="conversion-type">
       <option value="c-to-f">Celsius to Fahrenheit</option>
       <option value="f-to-c">Fahrenheit to Celsius</option>
@@ -57,44 +70,50 @@
       <option value="ft-to-m">Feet to Meters</option>
     </select>
 
-    <input type="number" id="input-value" placeholder="Enter value" />
+    <label for="input-value">Enter Value:</label>
+    <input type="number" id="input-value" placeholder="Enter a value">
 
-    <button onclick="convert()">Convert</button>
+    <button onclick="performConversion()">Convert</button>
 
-    <p id="result"></p>
+    <div id="result" class="result"></div>
   </div>
 
   <script>
-    function convert() {
-      const type = document.getElementById("conversion-type").value;
-      const input = parseFloat(document.getElementById("input-value").value);
-      const resultElement = document.getElementById("result");
+    function performConversion() {
+      const conversionType = document.getElementById("conversion-type").value;
+      const inputValue = parseFloat(document.getElementById("input-value").value);
+      const resultDiv = document.getElementById("result");
 
-      if (isNaN(input)) {
-        resultElement.textContent = "Please enter a valid number.";
+      if (isNaN(inputValue)) {
+        resultDiv.textContent = "Please enter a valid number!";
         return;
       }
 
-      let result;
-      switch (type) {
+      let result = "";
+
+      switch (conversionType) {
         case "c-to-f":
-          result = (input * 9/5) + 32;
-          resultElement.textContent = `${input}°C = ${result.toFixed(2)}°F`;
+          result = (inputValue * 9 / 5) + 32;
+          resultDiv.textContent = `${inputValue}°C = ${result.toFixed(2)}°F`;
           break;
+
         case "f-to-c":
-          result = (input - 32) * 5/9;
-          resultElement.textContent = `${input}°F = ${result.toFixed(2)}°C`;
+          result = (inputValue - 32) * 5 / 9;
+          resultDiv.textContent = `${inputValue}°F = ${result.toFixed(2)}°C`;
           break;
+
         case "m-to-ft":
-          result = input * 3.28084;
-          resultElement.textContent = `${input} meters = ${result.toFixed(2)} feet`;
+          result = inputValue * 3.28084;
+          resultDiv.textContent = `${inputValue} meters = ${result.toFixed(2)} feet`;
           break;
+
         case "ft-to-m":
-          result = input / 3.28084;
-          resultElement.textContent = `${input} feet = ${result.toFixed(2)} meters`;
+          result = inputValue / 3.28084;
+          resultDiv.textContent = `${inputValue} feet = ${result.toFixed(2)} meters`;
           break;
+
         default:
-          resultElement.textContent = "Invalid conversion type.";
+          resultDiv.textContent = "Unknown conversion type!";
       }
     }
   </script>
