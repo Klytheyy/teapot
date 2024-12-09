@@ -80,8 +80,37 @@
       header h1 {
         font-size: 28px;
       }
-      nav a {
+
+      header p {
         font-size: 16px;
+      }
+
+      nav a {
+        font-size: 14px;
+        margin: 0 10px;
+      }
+
+      iframe {
+        height: 300px; /* Adjust iframe height for smaller screens */
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav a {
+        display: block;
+        margin: 10px 0;
+      }
+
+      iframe {
+        height: 250px; /* Further adjust iframe height for extra small screens */
+      }
+
+      .container {
+        padding: 0 10px;
+      }
+
+      section {
+        padding: 15px;
       }
     }
   </style>
@@ -102,7 +131,7 @@
     <!-- About Me Section -->
     <section id="about">
       <h2>About Me</h2>
-      <p>Hello! I'm Clyde Estrada, a Computer Science student studying in Ateneo de Davao University. Welcome to my personal website or as I like to call it my "teapot"</p>
+      <p>Hello! I'm Clyde Estrada, a Computer Science student studying at Ateneo de Davao University. Welcome to my personal website or, as I like to call it, my "teapot."</p>
     </section>
 
     <!-- Assignments Section -->
@@ -133,4 +162,3 @@
 
 </body>
 </html>
-
